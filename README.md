@@ -1,2 +1,5 @@
 # Pedri
-## run server on npm run dev
+### how to run the project
+```javascript
+    npm run dev
+```
