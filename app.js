@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
+const selectcountry = require('./routes/selectcountry');
 const app = express();
 const port = 3000;
 const MongoURI = 
@@ -13,3 +15,8 @@ mongoose.connect(MongoURI)
     console.log(`Listening to requests on http://localhost:${port}`);
   })
 })
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/routes', require('./routes/selectcountry'));
+

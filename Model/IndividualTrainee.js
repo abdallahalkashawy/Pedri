@@ -25,6 +25,10 @@ const individualTraineeSchema = new Schema({
     Gender: {
       type: char,
       required: true
+    },
+    Country: {
+      type: String,
+      required: true
     }
   });
 
