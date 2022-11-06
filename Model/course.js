@@ -6,18 +6,14 @@ const courseSchema = new Schema({
       type: String,
       required: true,
     },
-    id: {
-      type: Number,
+    title: {
+      type: String,
       required: true,
     },
     instructor: {
-      type: String,
-      required: true,
-    },,
-    id: {
       type: Number,
       required: true,
-    }
+    },
     price: {
       type: Number,
       required: true

@@ -1,5 +1,5 @@
 const courses = [
-    { name: "Courses in England",    prices: 15.5 }, //1st object
+    { name: "Courses in England",    prices: 15.5  ,}, //1st object
     { name: "Courses in Germany",    prices: 20 }, //2nd object
     { name: "Courses in Italy",      prices: 44 }, //3rd object
     { name: "Courses in Russia",     prices: 74 }, //4th object
