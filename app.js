@@ -19,3 +19,4 @@ mongoose.connect(MongoURI)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
+app.use(errorHandler)
