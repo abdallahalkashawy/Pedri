@@ -1,8 +1,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-
-const selectcountry = require('./routes/selectcountry');
+const routes = require('./Routes/signup');
 const app = express();
 const port = 3000;
 const MongoURI = 
@@ -18,5 +17,4 @@ mongoose.connect(MongoURI)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/routes', require('./routes/selectcountry'));
-
+app.use(routes);

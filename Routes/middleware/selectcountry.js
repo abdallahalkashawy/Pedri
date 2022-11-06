@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 const countryList = 
 [
     {"name": "Afghanistan", "code": "AF"}, 
@@ -249,24 +246,20 @@ const countryList =
     {"name": "Zimbabwe", "code": "ZW"} 
     ]
 // Guest country
-router.post('/guest/selectcountry', (req, res)=>{
+const selectcountry =  (req,res)=>{
 try {
-    const {country} = req.body;
-    if(!req.body){
+    const country = req;
+    if(country == null){ 
         // res.send(req.body);
-        return res.status(400).json({msg: 'Please select a country'})
+        return {msg: 'Please select a country'}
     }
     const countryData = countryList[country];
-    if(!countryData){
-        console.log(countryData);
-        return res.status(400).json({msg: 'Please select a country'})
-    }
-    res.json(countryData.code);
+    // res.json(countryData.code);
+    return countryData;
 }
 catch (err) {
 console.log(err)
-res.send(err)
+// res.send(err)
 }
-});
-
-module.exports = router;
+};
+module.exports = selectcountry;
