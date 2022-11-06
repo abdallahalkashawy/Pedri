@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const routes = require('./Routes/signup');
+const courses = require('./Routes/ViewCourse');
 const app = express();
 const port = 3000;
 const MongoURI = 
@@ -19,4 +20,5 @@ mongoose.connect(MongoURI)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
-app.use(errorHandler)
+app.use(courses);
+// app.use(errorHandler)
