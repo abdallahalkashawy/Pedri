@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
-    name: {
-      type: String,
-      required: true,
-    },
+    
     title: {
       type: String,
       required: true,
@@ -16,10 +13,6 @@ const courseSchema = new Schema({
     },
     price: {
       type: Number,
-      required: true
-    },
-    category: {
-      type: String,
       required: true
     },
     rate: {
