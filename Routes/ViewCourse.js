@@ -8,12 +8,20 @@ const course = require('../model/course');
 //     res.status(200).send({price});
 // });
 
-router.post('/user/addcourse', (req,res)=> {
-    const cours = course.create(
+router.post('/guest/addcourse', (req,res)=> {
+    const newcourse =
         {
-            name: req.body.name
+            title: req.body.title,
+            instructor: req.body.instructor,
+            price: req.body.price,
+            rate: req.body.rate,
+            Status: req.body.Status,
+            Totalhours: req.body.Totalhours
         }
-    );
+    course.create(newcourse);
+    course.find({}).then((courses) => {
+        res.status(200).send(courses);
+    });
 });
 router.get('/viewcourse', (req,res) => {
     course.find({}).select('title rate price Totalhours -_id').exec((err, course) => {
