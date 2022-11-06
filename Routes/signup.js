@@ -26,7 +26,7 @@ router.post("/addingAdmin",async(req, res)=>{
 });
 
 
-//jjj
+//jjjkk
 router.post("/addingCorporateTrainee",async(req, res)=>{
     const addTrainee=  await CorporateTrainee.create(
         { UserName: req.body.Name,
