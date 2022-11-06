@@ -13,48 +13,71 @@ const Instructor = require("../Model/Instructor");
         res.json({msg: `Update contact ${req.params.id}`}); `});
 */
 
+
+
 router.post("/addingAdmin",async(req, res)=>{
+    const biho= await Administrator.findOne({UserName: req.body.Name})
+    if(biho==null){
     const addAdmin=  await Administrator.create(
         { UserName: req.body.Name,
         Country: req.body.Country,
         Password: req.body.Password,
         Type:"Admin"
+        
     });
 
      
-    res.status(200).send(addAdmin);
+    res.status(200).send(addAdmin);}
+
+    else{
+        res.send("pick another username please");
+
+    }
 });
 
 
-//jjjkk
+
 router.post("/addingCorporateTrainee",async(req, res)=>{
+    const biho= await CorporateTrainee.findOne({UserName: req.body.Name})
+    if(biho==null){
     const addTrainee=  await CorporateTrainee.create(
         { UserName: req.body.Name,
         Country: req.body.Country,
         Password: req.body.Password,
         Type:"CorporateTrainee"
-                   
+        
     });
 
      
-    res.status(200).send(addTrainee);
+    res.status(200).send(addTrainee);}
+
+    else{
+        res.send("pick another username please");
+
+    }
 });
 
 
 
 router.post("/addingInstructor",async(req, res)=>{
+    const biho= await Instructor.findOne({UserName: req.body.Name})
+    if(biho==null){
     const addInstructor=  await Instructor.create(
         { UserName: req.body.Name,
         Country: req.body.Country,
         Password: req.body.Password,
         Type:"Instructor"
+        
     });
 
      
-    res.status(200).send(addInstructor);
+    res.status(200).send(addInstructor);}
+
+    else{
+        res.send("pick another username please");
+
+    }
 });
-
-
 
 
 
