@@ -23,8 +23,17 @@ router.post('/guest/addcourse', (req,res)=> {
         res.status(200).send(courses);
     });
 });
-router.get('/viewcourse', (req,res) => {
-    course.find({}).select('title rate price Totalhours -_id').exec((err, course) => {
+router.get('/viewcourse_titles_rate_Totalhours', (req,res) => {
+    course.find({}).select('title rate Totalhours -_id').exec((err, course) => {
+        if(err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(course);
+        }
+    });  
+}); 
+router.get('/viewcourse_price', (req,res) => {
+    course.find({}).select('price -_id').exec((err, course) => {
         if(err) {
             res.status(500).send(err);
         } else {
