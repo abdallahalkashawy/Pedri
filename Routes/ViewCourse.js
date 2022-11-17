@@ -63,7 +63,7 @@ router.get('/viewallInstructors', (req,res) => {
     });  
   });
 
-  router.get('/searchinst/:inid', async (req,res) => {
+  router.get('/InstructorViewCourse/:inid', async (req,res) => {
     course.find({instructor :req.params.inid}).select('title -_id').exec((err, course) => {
         if(err) {
             res.status(500).send(err
@@ -88,5 +88,15 @@ router.get('/viewallInstructors', (req,res) => {
     // }
 });
 
+router.get('/InstructorFilterCourse/:inid', async (req,res) => {
+    course.find({instructor :req.params.inid , subject : req.body.subject}).select('title subject instructor-_id').exec((err, course) => {
+        if(err) {
+            res.status(500).send(err
+                );
+        } else if(course != null){
+            res.status(200).send(course);
+        }
+    });
+});
 
 module.exports = router;
