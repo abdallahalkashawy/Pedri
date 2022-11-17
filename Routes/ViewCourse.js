@@ -2,7 +2,7 @@ const express = require('express');
 const { $lte } = require('sift');
 const router = express.Router();
 const course = require('../model/course');
-const Instructor = require('../model/Instructor');
+// const Instructor = require('../model/Instructor');
 
 router.post('/guest/addcourse', (req,res)=> {
     const newcourse =
