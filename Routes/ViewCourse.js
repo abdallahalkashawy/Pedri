@@ -33,4 +33,25 @@ router.get('/viewcourse', (req,res) => {
     });  
 }); 
 
+router.get('/fiterrate', async (req,res) => {
+    try{
+  
+      var response = await course.aggregate([{ $match: { rate:req.body.rate}}]);
+      res.send(response);
+    
+    }catch(error){
+      res.status(500).send(error);
+    }
+    });
+    router.get('/fiterprice', async (req,res) => {
+        try{
+          let pricee = req.body.price;
+          var response = await course.aggregate([{ $match: { price:pricee}}]);
+          res.send(response);
+        
+        }catch(error){
+          res.status(500).send(error);
+        }
+        });
+
 module.exports = router;
