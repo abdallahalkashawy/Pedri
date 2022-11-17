@@ -66,6 +66,9 @@ router.post("/addingCorporateTrainee",async(req, res)=>{
     }
 });
 
+
+
+
 router.post("/addingInstructor",async(req, res)=>{
     const biho= await Instructor.findOne({UserName: req.body.UserName})
     if(biho==null){

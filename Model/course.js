@@ -8,7 +8,7 @@ const courseSchema = new Schema({
       required: true,
     },
     instructor: {
-      type: Number,
+      type: String,
       required: true,
     },
     subject: {

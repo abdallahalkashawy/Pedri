@@ -2,6 +2,7 @@ const express = require('express');
 const { $lte } = require('sift');
 const router = express.Router();
 const course = require('../model/course');
+const Instructor = require('../Model/Instructor');
 // const Instructor = require('../model/Instructor');
 
 router.post('/guest/addcourse', (req,res)=> {
@@ -50,5 +51,42 @@ router.get('/viewallcourse_price', (req,res) => {
         }
     });  
 }); 
+
+router.get('/viewallInstructors', (req,res) => {
+    Instructor.find({}).select().exec((err, course) => {
+        if(err) {
+            res.status(500).send(err);
+        } else {
+  
+            res.status(200).send(course);
+        }
+    });  
+  });
+
+  router.get('/searchinst/:inid', async (req,res) => {
+    course.find({instructor :req.params.inid}).select('title -_id').exec((err, course) => {
+        if(err) {
+            res.status(500).send(err
+                );
+        } else if(course != null){
+            res.status(200).send(course);
+        }
+    });
+     // ([{ $match: {instructor :req.params.inid}}]);
+      
+        // var response = await mine.aggregate([{ $match: { subject: req.body.subject}}]); 
+        // res.send(mine);
+    //   }else if(req.body.instructor){
+    //     var repo = await course.aggregate([{$match: {instructor:req.body.instructor}}]);
+    //     res.send(repo);
+    //   }else if(req.body.title){
+    //     var repoo = await course.aggregate([{$match: {title:req.body.title}}])
+    //     res.send(repoo);
+    //   }
+    // }catch(error){
+    //   res.status(500).send("error");
+    // }
+});
+
 
 module.exports = router;
