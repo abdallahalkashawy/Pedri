@@ -16,17 +16,25 @@ const Instructor = require("../Model/Instructor");
 
 router.post("/addingAdmin",async(req, res)=>{
     const biho= await Administrator.findOne({UserName: req.body.UserName})
-    if(biho == null){
+if(biho == null){
     const addAdmin=  await Administrator.create(
         {
          UserName: req.body.UserName,
         // Country: req.body.Country,
         Password: req.body.Password,
         Type:"Admin"
-    })
-    res.status(200).send(addAdmin);
+    }).catch((err)=>{
+        if(err.errors.UserName){
+        return res.send("must enter username");
+        }
+        else if(err.errors.Password){
+        return res.send("must enter password");
+        }
+    }).then((result)=>{
+     res.status(200).send(result);
+    });
 }
-    else{
+else{
         res.send("pick another username");
     }
 });
@@ -41,38 +49,46 @@ router.post("/addingCorporateTrainee",async(req, res)=>{
         // Country: req.body.Country,
         Password: req.body.Password,
         Type:"CorporateTrainee"
+    }).catch((err)=>{
+        if(err.errors.UserName){
+        res.send("must enter username");
+        }
+        else if(err.errors.Password){
+            res.send("must enter password");
+        }
+    }).then((data)=>{
+        res.status(200).send(data);
     })
-    res.status(200).send(addCorporateTrainee);
+    // res.status(200).send(addCorporateTrainee);
 }
     else{
         res.send("pick another username");
     }
 });
 
-
-
 router.post("/addingInstructor",async(req, res)=>{
-    // const biho= await Instructor.findOne({UserName: req.body.UserName})
-    // if(biho==null){
-    const addInstructor= Instructor.create(
+    const biho= await Instructor.findOne({UserName: req.body.UserName})
+    if(biho==null){
+  const addInstructor= Instructor.create(
     {
         UserName: req.body.UserName,
         // Country: req.body.Country,
         Password: req.body.Password,
         Type:"Instructor"
-    });
-    // res.status(200).send(addInstructor);
-    if(addInstructor){
+    }).catch((err)=>{
+        if(err.errors.UserName){
+        res.send("must enter username");
+        }
+        else if(err.errors.Password){
+        res.send("must enter password");
+        }
+    }).then((addInstructor)=>{
         res.status(200).send(addInstructor);
-    }
+    })
+}
     else{
-        res.send("k");
+        res.send("pick another username please");
     }
-// res.status(200).send(addInstructor);
-// }s
-    // else{
-        // res.send("pick another username please");
-    // }
 });
 
 
