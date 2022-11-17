@@ -87,17 +87,6 @@ router.get('/fiterrate', async (req,res) => {
 
 
 
-    
-
-
-
-
-
-
-
-
-
-
-
+  
 
 module.exports = router;
