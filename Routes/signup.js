@@ -4,7 +4,7 @@ const selectcountry = require('./middleware/selectcountry');
 const Administrator = require("../Model/Administrator");
 const CorporateTrainee = require("../Model/CorporateTrainee");
 const Instructor = require("../Model/Instructor");
-
+//testing bihos branch
 //convert string to int we use "parseInt()"
 
 // to equate two types we use "==="
