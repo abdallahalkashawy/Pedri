@@ -3,8 +3,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const routes = require('./Routes/signup');
 const courses = require('./Routes/ViewCourse');
+const exam = require('./Routes/ExamUtils');
+const cors = require('cors');
 const app = express();
 const port = 3000;
+
+app.use(cors());
 const MongoURI = 
 'mongodb+srv://Pedri:Pedri@cluster0.7oxvhwk.mongodb.net/?retryWrites=true&w=majority' ;
 
@@ -21,4 +25,5 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
 app.use(courses);
+app.use(exam);
 // app.use(errorHandler)
