@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const selectcountry = require('./middleware/selectcountry');
-const Administrator = require("../Model/Administrator");
+const { Administrator, validate } = require("../Model/Administrator");
 const CorporateTrainee = require("../Model/CorporateTrainee");
 const Instructor = require("../Model/Instructor");
+//testing bihos branch
+
 
 //convert string to int we use "parseInt()"
 
@@ -22,6 +24,7 @@ if(biho == null){
          UserName: req.body.UserName,
         // Country: req.body.Country,
         Password: req.body.Password,
+        email: req.body.email,
         Type:"Admin"
     }).catch((err)=>{
         if(err.errors.UserName){
@@ -30,6 +33,10 @@ if(biho == null){
         else if(err.errors.Password){
         return res.send("must enter password");
         }
+        if(err.errors.email){
+            return res.send("must enter email");
+            }
+       
     }).then((result)=>{
      res.status(200).send(result);
     });
@@ -80,7 +87,7 @@ router.post("/addingInstructor",async(req, res)=>{
         Type:"Instructor"
     }).catch((err)=>{
         if(err.errors.UserName){
-        res.send("must enter username");
+        res.send("must enter usernamee");
         }
         else if(err.errors.Password){
         res.send("must enter password");
@@ -99,5 +106,54 @@ router.post('/guest/selectcountry', (req, res)=>{
     const country = selectcountry(req.body.country);
     res.send(country);
 });
+
+//changepass
+router.put('/changepass', async (req,res) => {
+ const newPass = req.body.newPass
+ const id = req.body.id
+
+ try {  
+    await Administrator.findById(id,(error,updatedUser) => {
+        updatedUser.Password = newPass;
+        updatedUser.save();
+    
+    
+    });
+    
+ } catch (err) {
+    console.log(err);
+ }
+
+ res.send("updated password succuesfully");
+
+}
+);
+
+
+//testing change pass method start
+
+
+// router.post("/changePasss", async (req, res) => {
+//     try {
+//         const { error } = validate(req.body);
+//         if (error) return res.status(400).send(error.details[0].message);
+
+//         const user = await new Administrator(req.body).save();
+
+//         res.send(user);
+//     } catch (error) {
+//         res.send("An error occured");
+//         console.log(error);
+//     }
+// });
+
+1
+
+//end
+
+
+
+
+router.get('')
 
 module.exports = router;

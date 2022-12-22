@@ -1,7 +1,10 @@
+require("dotenv").config(); //new
 const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-const routes = require('./Routes/signup');
+const passwordReset = require("./Routes/passwordReset"); //new
+const routes = require('./Routes/signup'); 
+const users = require('./Routes/users');  //new
 const courses = require('./Routes/ViewCourse');
 const exam = require('./Routes/ExamUtils');
 const cors = require('cors');
@@ -26,4 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
 app.use(courses);
 app.use(exam);
+app.use("/api/users", users); //new
+app.use("/api/password-reset", passwordReset); //new
+///app.use("/password-reset", passwordReset);
 // app.use(errorHandler)
+//test again

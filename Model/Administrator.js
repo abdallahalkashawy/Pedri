@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Joi = require("joi");
 
 const AdministratorSchema = new Schema({
   UserName: {
@@ -14,6 +15,10 @@ Country:{
   type: String,
   required:false,
 },
+email:{
+  type: String,//true
+  required:false,
+},
 Type:{
   type: String,
   required:false,
@@ -22,4 +27,18 @@ Type:{
 }, { timestamps: true });
 
 const Administrator = mongoose.model('Administrator', AdministratorSchema);
-module.exports = Administrator;
+
+
+
+
+const validate = (Administrator) => {
+
+  const schema = Joi.object({
+       UserName: Joi.string().required(),
+       email: Joi.string().email().required(),
+       Password: Joi.string().required(),
+       });
+  return schema.validate(Administrator);
+};
+
+module.exports = { Administrator, validate };
