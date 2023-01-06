@@ -5,8 +5,15 @@ const SolvedExamSchema = new Schema({
   Code: {
     type: String,
     required: [true, "Please add a code"],
-    unique: true,
+    unique: 'compositeIndex',
+    index : true
   },
+  TraineeID : {
+    type: String,
+    required: [true, "Please add a trainee ID"],
+    unique: 'compositeIndex',
+    index : true
+    },
   Answer: [
     {
       ExerciseID: {
@@ -16,11 +23,8 @@ const SolvedExamSchema = new Schema({
         type: String,
       },
     },
-  ],
-  TraineeID : {
-    type: String,
-    required: [true, "Please add a trainee ID"],
-    },
+  ]
+  
 });
 
 const SolvedExam = mongoose.model("SolvedExam", SolvedExamSchema);
