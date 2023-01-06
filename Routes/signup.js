@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+const createNewUser = require('./middleware/newuser');
 const selectcountry = require('./middleware/selectcountry');
 const { Administrator, validate } = require("../Model/Administrator");
 const CorporateTrainee = require("../Model/CorporateTrainee");
 const Instructor = require("../Model/Instructor");
+const NewUser = require("../Model/NewUser");
 //testing bihos branch
 
 
@@ -38,8 +42,9 @@ if(biho == null){
             }
        
     }).then((result)=>{
-     res.status(200).send(result);
-    });
+     createNewUser(req.body.UserName,req.body.Password,"Admin");
+    res.status(200).send(result);    
+});
 }
 else{
         res.send("pick another username");
@@ -65,6 +70,7 @@ router.post("/addingCorporateTrainee",async(req, res)=>{
         }
     }).then((data)=>{
         res.status(200).send(data);
+        createNewUser(addCorporateTrainee.UserName,addCorporateTrainee.Password,addCorporateTrainee.Type);
     })
     // res.status(200).send(addCorporateTrainee);
 }
@@ -94,6 +100,7 @@ router.post("/addingInstructor",async(req, res)=>{
         }
     }).then((addInstructor)=>{
         res.status(200).send(addInstructor);
+        createNewUser(addInstructor.UserName,addInstructor.Password,addInstructor.Type);
     })
 }
     else{
@@ -151,6 +158,18 @@ router.put('/changepass', async (req,res) => {
 
 //end
 
+// LOGIN
+router.post('/login', async (req, res) => {
+    const { UserName, Password } = req.body;
+    try{
+        const user = await NewUser.login(UserName, Password);
+        
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+});
 
 
 
