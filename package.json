@@ -22,9 +22,11 @@
     "call-bind": "^1.0.2",
     "chokidar": "^3.5.3",
     "concat-map": "^0.0.1",
+    "concurrently": "^7.6.0",
     "content-disposition": "^0.5.4",
     "content-type": "^1.0.4",
     "cookie": "^0.5.0",
+    "cookie-parser": "^1.4.6",
     "cookie-signature": "^1.0.6",
     "cors": "^2.8.5",
     "debug": "^2.6.9",
@@ -125,8 +127,9 @@
     "whatwg-url": "^11.0.0"
   },
   "scripts": {
-    "start": "node app",
-    "dev": "nodemon app.js"
+    "server": "nodemon authServer",
+    "dev": "nodemon app.js",
+    "client": "concurrently \"npm run server\" \"npm run dev\""
   },
   "repository": {
     "type": "git",

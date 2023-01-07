@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const createNewUser = require('./middleware/newuser');
 const selectcountry = require('./middleware/selectcountry');
 const { Administrator, validate } = require("../Model/Administrator");
 const CorporateTrainee = require("../Model/CorporateTrainee");
 const Instructor = require("../Model/Instructor");
 const NewUser = require("../Model/NewUser");
+const authenticateToken = require('./middleware/authenticatetoken');
 //testing bihos branch
 
 
@@ -163,15 +164,20 @@ router.post('/login', async (req, res) => {
     const { UserName, Password } = req.body;
     try{
         const user = await NewUser.login(UserName, Password);
-        
+        const accessToken = jwt.sign({UserName :user.UserName,Type :user.Type },process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' });
+        res.json(user.UserName);
     }
     catch(err){
-        console.log(err);
+        res.status(400).send('Invalid username/password');
     }
     
 });
 
 
+
+router.post('/authenticate', authenticateToken, (req, res) => {
+    res.json(req.user);
+});
 
 router.get('')
 

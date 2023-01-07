@@ -14,7 +14,7 @@ const port = 3000;
 app.use(cors());
 const MongoURI = 
 'mongodb+srv://Pedri:Pedri@cluster0.7oxvhwk.mongodb.net/?retryWrites=true&w=majority' ;
-
+mongoose.set('strictQuery',false);
 mongoose.connect(MongoURI)
 .then(()=>{
   console.log("MongoDB is now connected!")
