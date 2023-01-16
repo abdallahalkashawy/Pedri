@@ -1,16 +1,16 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const createNewUser = require('./middleware/newuser');
-const selectcountry = require('./middleware/selectcountry');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const createNewUser = require("./middleware/newuser");
+const selectcountry = require("./middleware/selectcountry");
 const { Administrator, validate } = require("../Model/Administrator");
+const IndividualTrainee = require("../Model/IndividualTrainee");
 const CorporateTrainee = require("../Model/CorporateTrainee");
 const Instructor = require("../Model/Instructor");
 const NewUser = require("../Model/NewUser");
-const authenticateToken = require('./middleware/authenticatetoken');
+const authenticateToken = require("./middleware/authenticatetoken");
 //testing bihos branch
-
 
 //convert string to int we use "parseInt()"
 
@@ -21,125 +21,168 @@ const authenticateToken = require('./middleware/authenticatetoken');
         res.json({msg: `Update contact ${req.params.id}`}); `});
 */
 
-router.post("/addingAdmin",async(req, res)=>{
-    const biho= await Administrator.findOne({UserName: req.body.UserName})
-if(biho == null){
-    const addAdmin=  await Administrator.create(
-        {
-         UserName: req.body.UserName,
-        // Country: req.body.Country,
-        Password: req.body.Password,
-        email: req.body.email,
-        Type:"Admin"
-    }).catch((err)=>{
-        if(err.errors.UserName){
-        return res.send("must enter username");
+router.post("/addingAdmin", async (req, res) => {
+  const biho = await Administrator.findOne({ UserName: req.body.UserName });
+  if (biho == null) {
+    const addAdmin = await Administrator.create({
+      UserName: req.body.UserName,
+      // Country: req.body.Country,
+      Password: req.body.Password,
+      email: req.body.email,
+      Type: "Admin",
+    })
+      .catch((err) => {
+        if (err.errors.UserName) {
+          return res.send("must enter username");
+        } else if (err.errors.Password) {
+          return res.send("must enter password");
         }
-        else if(err.errors.Password){
-        return res.send("must enter password");
+        if (err.errors.email) {
+          return res.send("must enter email");
         }
-        if(err.errors.email){
-            return res.send("must enter email");
-            }
-       
-    }).then((result)=>{
-     createNewUser(req.body.UserName,req.body.Password,"Admin");
-    res.status(200).send(result);    
-});
-}
-else{
-        res.send("pick another username");
-    }
+      })
+      .then((result) => {
+        createNewUser(req.body.UserName, req.body.Password, "Admin");
+        res.status(200).send(result);
+      });
+  } else {
+    res.send("pick another username");
+  }
 });
 
-
-router.post("/addingCorporateTrainee",async(req, res)=>{
-    const biho= await CorporateTrainee.findOne({UserName: req.body.UserName})
-    if(biho == null){
-    const addCorporateTrainee=  await CorporateTrainee.create(
-        {
-         UserName: req.body.UserName,
-        // Country: req.body.Country,
-        Password: req.body.Password,
-        Type:"CorporateTrainee"
-    }).catch((err)=>{
-        if(err.errors.UserName){
-        res.send("must enter username");
+router.post("/addingCorporateTrainee", async (req, res) => {
+  const biho = await CorporateTrainee.findOne({ UserName: req.body.UserName });
+  if (biho == null) {
+    const addCorporateTrainee = await CorporateTrainee.create({
+      UserName: req.body.UserName,
+      // Country: req.body.Country,
+      Password: req.body.Password,
+      Type: "CorporateTrainee",
+    })
+      .catch((err) => {
+        if (err.errors.UserName) {
+          res.send("must enter username");
+        } else if (err.errors.Password) {
+          res.send("must enter password");
         }
-        else if(err.errors.Password){
-            res.send("must enter password");
-        }
-    }).then((data)=>{
+      })
+      .then((data) => {
         res.status(200).send(data);
-        createNewUser(addCorporateTrainee.UserName,addCorporateTrainee.Password,addCorporateTrainee.Type);
-    })
-    // res.status(200).send(addCorporateTrainee);
-}
-    else{
-        res.send("pick another username");
-    }
+        createNewUser(
+          addCorporateTrainee.UserName,
+          addCorporateTrainee.Password,
+          addCorporateTrainee.Type
+        );
+      });
+  } else {
+    res.send("pick another username");
+  }
 });
 
-
-
-
-router.post("/addingInstructor",async(req, res)=>{
-    const biho= await Instructor.findOne({UserName: req.body.UserName})
-    if(biho==null){
-  const addInstructor= Instructor.create(
-    {
-        UserName: req.body.UserName,
-        // Country: req.body.Country,
-        Password: req.body.Password,
-        Type:"Instructor"
-    }).catch((err)=>{
-        if(err.errors.UserName){
-        res.send("must enter usernamee");
+router.post("/addingInstructor", async (req, res) => {
+  const biho = await Instructor.findOne({ UserName: req.body.UserName });
+  if (biho == null) {
+    const addInstructor = Instructor.create({
+      UserName: req.body.UserName,
+      Password: req.body.Password,
+    })
+      .catch((err) => {
+        if (err.errors.UserName) {
+          res.send("must enter usernamee");
+        } else if (err.errors.Password) {
+          res.send("must enter password");
         }
-        else if(err.errors.Password){
-        res.send("must enter password");
-        }
-    }).then((addInstructor)=>{
+      })
+      .then((addInstructor) => {
         res.status(200).send(addInstructor);
-        createNewUser(addInstructor.UserName,addInstructor.Password,addInstructor.Type);
-    })
-}
-    else{
-        res.send("pick another username please");
+        createNewUser(
+          addInstructor.UserName,
+          addInstructor.Password,
+          "Instructor"
+        );
+      });
+  } else {
+    res.send("pick another username please");
+  }
+});
+
+router.post("/guest/selectcountry", (req, res) => {
+  const country = selectcountry(req.body.country);
+  res.send(country);
+});
+
+router.post("/individualtrainee/signup",async(req, res) => {
+    try{
+    const newIndividualTrainee = new IndividualTrainee({
+    UserName: req.body.UserName,
+    Password: req.body.Password,
+    Email: req.body.Email,
+    FirstName: req.body.FirstName,
+    LastName: req.body.LastName,
+    Gender: req.body.Gender,
+    Country: req.body.Country
+    });
+    await createNewUser(newIndividualTrainee.UserName, newIndividualTrainee.Password, "IndividualTrainee")
+     await newIndividualTrainee.save();
+    res.json(newIndividualTrainee);
+    }catch(err) {
+        if (err.message.includes("UserName_1")) {
+            res.status(400).send("Username already exists");
+        } else if(err.message.includes("Email_1")){
+            res.status(400).send("Email already exists");
+        }
+        else{
+            res.status(400).json(err);
+        }
     }
 });
 
-
-router.post('/guest/selectcountry', (req, res)=>{
-    const country = selectcountry(req.body.country);
-    res.send(country);
+router.post("/instructor/signup",async(req, res) => {
+    try{
+    const newInstructor = new Instructor({
+    UserName: req.body.UserName,
+    Password: req.body.Password,
+    Email: req.body.Email,
+    FirstName: req.body.FirstName,
+    LastName: req.body.LastName,
+    Gender: req.body.Gender,
+    Country: req.body.Country
+    });
+    await createNewUser(newInstructor.UserName, newInstructor.Password, "Instructor")
+     await newInstructor.save();
+    res.json(newInstructor);
+    
+    }catch(err) {
+        if (err.message.includes("UserName_1")) {
+            res.status(400).json("Username already exists");
+        } else if(err.message.includes("Email_1")){
+            res.status(400).json("Email already exists");
+        }
+        else{
+            res.status(400).json(err);
+        }
+    }
 });
+
 
 //changepass
-router.put('/changepass', async (req,res) => {
- const newPass = req.body.newPass
- const id = req.body.id
+router.put("/changepass", async (req, res) => {
+  const newPass = req.body.newPass;
+  const id = req.body.id;
 
- try {  
-    await Administrator.findById(id,(error,updatedUser) => {
-        updatedUser.Password = newPass;
-        updatedUser.save();
-    
-    
+  try {
+    await Administrator.findById(id, (error, updatedUser) => {
+      updatedUser.Password = newPass;
+      updatedUser.save();
     });
-    
- } catch (err) {
+  } catch (err) {
     console.log(err);
- }
+  }
 
- res.send("updated password succuesfully");
-
-}
-);
-
+  res.send("updated password succuesfully");
+});
 
 //testing change pass method start
-
 
 // router.post("/changePasss", async (req, res) => {
 //     try {
@@ -155,30 +198,28 @@ router.put('/changepass', async (req,res) => {
 //     }
 // });
 
-1
-
 //end
 
 // LOGIN
-router.post('/login', async (req, res) => {
-    const { UserName, Password } = req.body;
-    try{
-        const user = await NewUser.login(UserName, Password);
-        const accessToken = jwt.sign({UserName :user.UserName,Type :user.Type },process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' });
-        res.json(user.UserName);
-    }
-    catch(err){
-        res.status(400).send('Invalid username/password');
-    }
-    
+router.post("/login", async (req, res) => {
+  const { UserName, Password } = req.body;
+  try {
+    const user = await NewUser.login(UserName, Password);
+    const accessToken = jwt.sign(
+      { UserName: user.UserName, Type: user.Type },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "15s" }
+    );
+    res.json(user.UserName);
+  } catch (err) {
+    res.status(400).send("Invalid username/password");
+  }
 });
 
-
-
-router.post('/authenticate', authenticateToken, (req, res) => {
-    res.json(req.user);
+router.post("/authenticate", authenticateToken, (req, res) => {
+  res.json(req.user);
 });
 
-router.get('')
+router.get("");
 
 module.exports = router;

@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require("express");
+const cors = require('cors');
 const app = express();
 
 const jwt = require('jsonwebtoken');
@@ -21,10 +22,45 @@ mongoose.connect(MongoURI)
   })
 })
 
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { username: '', password: '' };
+
+  // incorrect username
+  if (err.message === 'incorrect username') {
+    errors.username = 'That username is not registered';
+  }
+
+  // incorrect password
+  if (err.message === 'incorrect password') {
+    errors.password = 'That password is incorrect';
+  }
+
+  // duplicate email error
+  if (err.code === 11000) {
+    errors.email = 'that email is already registered';
+    return errors;
+  }
+
+  // validation errors
+  if (err.message.includes('user validation failed')) {
+    // console.log(err);
+    Object.values(err.errors).forEach(({ properties }) => {
+      // console.log(val);
+      // console.log(properties);
+      errors[properties.path] = properties.message;
+    });
+  }
+
+  return errors;
+}
+
 
 app.post('/token', async (req, res) => {
     const UserName = req.body.UserName;
@@ -45,12 +81,14 @@ app.post('/login', async (req, res) => {
         const user = await NewUser.login(UserName, Password);
         const accessToken = generateAccessToken(user);
         const refreshToken = jwt.sign({UserName :user.UserName}, process.env.REFRESH_TOKEN_SECRET);
-        RefreshToken.create({UserName : user.UserName,Token : refreshToken});
-        res.send(user.UserName);
+        if(RefreshToken.findOne({UserName : user.UserName}) == null){
+          RefreshToken.create({UserName : user.UserName,Token : refreshToken});
+        }
+        res.status(200).json(user);
         // res.json({ accessToken: accessToken, refreshToken: refreshToken })
     }
     catch(err){
-        res.status(400).send(err);
+        res.status(400).json({message: err.message});
     }
 });
 

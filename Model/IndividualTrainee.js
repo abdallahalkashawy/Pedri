@@ -2,33 +2,35 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const individualTraineeSchema = new Schema({
-    Username: {
+    UserName: {
       type: String,
-      required: true,
+      unique: [true, "Username already exists"],
+      required: true
     },
     Email: {
       type: String,
-      required: true
+      unique: [true, "Email already exists"],
+      required: false,
     },
     Password: {
-      type: Number,
+      type: String,
       required: true,
     },
     FirstName: {
       type: String,
-      required: true
+      required: false
     },
     LastName: {
       type: String,
-      required: true
+      required: false
     },
     Gender: {
-      type: char,
-      required: true
+      type: String,
+      required: false
     },
     Country: {
       type: String,
-      required: true
+      required: false
     }
   });
 
