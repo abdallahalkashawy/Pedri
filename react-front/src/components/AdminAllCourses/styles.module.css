@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+  }
+  
+  button {
+    background-color: #eb60ac;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: #460127;
+  }
+  
+  div {
+    margin: 20px 0;
+  }
+  
+  .courseName {
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .reportButton {
+    float: right;
+    margin-left: 2px;
+  }
+  .right-position {
+    position: absolute;
+    right: 0;
+}

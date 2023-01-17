@@ -1,0 +1,17 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    background-color: #F8D7DA; 
+    padding: 20px;
+    border-radius: 10px; 
+}
+
+.sidebar-link {
+    display: block;
+    margin-bottom: 10px;
+    color: #000;
+    text-decoration: none;
+}
