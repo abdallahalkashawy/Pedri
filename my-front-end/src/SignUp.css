@@ -1,0 +1,42 @@
+/* SignUpPage.css */
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    border: 20px solid gray;
+  }
+  
+  label {
+    margin: 10px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 5px;
+    margin: 5px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+  
+  select {
+    padding: 5px;
+    margin: 5px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+  
+  button[type="submit"] {
+    padding: 5px;
+    margin: 5px;
+    width: 100px;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+  }
+  

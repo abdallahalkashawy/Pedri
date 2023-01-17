@@ -1,0 +1,109 @@
+
+.questionnew {
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    padding: 2px;
+    border: 16px solid rgb(28, 163, 163);
+    margin-top: 10;
+    color : white;
+    width : 60%;
+    height : auto;
+  }
+  .questionnew h2{
+    color: rgb(1, 1, 1);
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+.q1{
+    color: azure;
+    background-color: rgb(100, 192, 192);
+    padding: 10px;
+    border : 20px solid #ccc;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 30px;
+    width : 80%;
+    
+  }
+  
+  .q2
+  {
+    background-color: darkgray;
+    padding: 10px;
+    border : 6px solid #ccc;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 30px;
+    width : 80%;
+  }
+  
+  .questionnew ul{
+    list-style: none;
+  }
+  
+  .questionnew li{
+    background-color: rgb(28, 163, 163);
+    padding: 5px;
+    border : 6px solid rgb(28, 163, 163);
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 30px;
+    box-shadow: 1px 8px 8px #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .questiontext
+  {
+    color: aquamarine;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    
+  }
+  .submit{
+
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    width: auto;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #ccc;
+
+  }
+
+  .remove
+  {
+    background-color: rgb(34, 46, 215);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    width: auto;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    /* left: 30px;  */
+  }
+  .add
+  {
+    background-color: rgb(34, 46, 215);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    width: auto;
+    height: 25px;
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    /* left: 30px;  */
+  }

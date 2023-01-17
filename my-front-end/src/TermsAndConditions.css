@@ -1,0 +1,44 @@
+.terms-and-conditions-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem #ccc;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+p {
+    line-height: 1.5;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button-container {
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.accept-button {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.decline-button {
+    background-color: #28a745;
+    color: white;
+}
