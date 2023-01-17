@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
             return res.status(400).send("user with given email doesn't exist");
 
         let token = await Token.findOne({ userId: user._id });
-        if (!token) {
+        if (!token) { 
             token = await new Token({
                 userId: user._id,
                 token: crypto.randomBytes(32).toString("hex"),
