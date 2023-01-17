@@ -53,7 +53,7 @@ const ExamSchema = new Schema({
       type: String,
     },
   }],
-  InstructorID: {
+  UserName: {
     type: String,
     required: [true, "Please add an instructor ID"],
   },

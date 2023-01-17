@@ -8,7 +8,7 @@ const SolvedExamSchema = new Schema({
     unique: 'compositeIndex',
     index : true
   },
-  TraineeID : {
+  TraineeUsername : {
     type: String,
     required: [true, "Please add a trainee ID"],
     unique: 'compositeIndex',
@@ -23,7 +23,10 @@ const SolvedExamSchema = new Schema({
         type: String,
       },
     },
-  ]
+  ],
+  Grade : {
+    type: String,
+  }
   
 });
 

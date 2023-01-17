@@ -88,7 +88,7 @@ app.post('/login', async (req, res) => {
         // res.json({ accessToken: accessToken, refreshToken: refreshToken })
     }
     catch(err){
-        res.status(400).json({message: err.message});
+        res.status(400).json("Incorrect username or password");
     }
 });
 
