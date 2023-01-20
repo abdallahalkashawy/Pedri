@@ -56,9 +56,7 @@ const Exam = () => {
   };
 
   const addAnotherHandle = () => {
-    if (ExerciseCode.length !== 0) {
-      setSubjectCodeError(true);
-    } else {
+   
       {
         ExerciseCode &&
           setQuestions((questions) => {
@@ -75,9 +73,7 @@ const Exam = () => {
               },
             ];
           });
-        setSubjectCodeError(false);
       }
-    }
   };
 
   const removeQuestion = (id) => {

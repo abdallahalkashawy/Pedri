@@ -30,6 +30,15 @@ router.post("/instructor/addExam", async (req, res) => {
       Answer: req.body.Answer,
       UserName: req.body.UserName,
     });
+    const code = req.body.Code;
+    const coursetitle = code.split('-')[0]
+
+    await course.findOneAndUpdate(
+      {title : coursetitle},
+      {$push : {Exams : code}}
+    ).then((data) => {
+      res.status(200).send(data);
+    });
     res.status(200).send(addExam);
   } catch (err) {
     if (err.code === 11000) {
