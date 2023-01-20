@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -9,6 +10,7 @@ const IndividualTrainee = require("../Model/IndividualTrainee");
 const CorporateTrainee = require("../Model/CorporateTrainee");
 const Instructor = require("../Model/Instructor");
 const NewUser = require("../Model/NewUser");
+const RefreshToken = require("../Model/RefreshToken");
 const authenticateToken = require("./middleware/authenticatetoken");
 //testing bihos branch
 
@@ -201,25 +203,5 @@ router.put("/changepass", async (req, res) => {
 //end
 
 // LOGIN
-router.post("/login", async (req, res) => {
-  const { UserName, Password } = req.body;
-  try {
-    const user = await NewUser.login(UserName, Password);
-    const accessToken = jwt.sign(
-      { UserName: user.UserName, Type: user.Type },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "15s" }
-    );
-    res.json(user.UserName);
-  } catch (err) {
-    res.status(400).send("Invalid username/password");
-  }
-});
-
-router.post("/authenticate", authenticateToken, (req, res) => {
-  res.json(req.user);
-});
-
-router.get("");
 
 module.exports = router;
