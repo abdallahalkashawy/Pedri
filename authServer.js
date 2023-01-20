@@ -92,6 +92,11 @@ app.post('/login', async (req, res) => {
     }
 });
 
+
+function generateAccessToken(user) {
+  return jwt.sign({UserName : user.UserName}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+}
+
 app.get('/viewcookie', (req, res) => {
     // Get the refresh token from the cookie
     res.cookie("name","George");
@@ -104,11 +109,27 @@ app.get('/get-refresh-token', (req, res) => {
     res.send(`Refresh token: ${refreshToken}`);
   });
 
-function generateAccessToken(user) {
-    return jwt.sign({UserName : user.UserName}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+
+  app.post('/login', async (req, res) => {
+    const { UserName, Password } = req.body;
+    try{
+        const useroutput = await NewUser.login(UserName, Password);
+        const accessToken = generateAccessToken(useroutput);
+        const refreshToken = jwt.sign({UserName :user.UserName}, process.env.REFRESH_TOKEN_SECRET);
+        const user = {UserName: useroutput.UserName, Type: useroutput.Type , accessToken: accessToken}
+        res.status(200).json(user);
+        // res.json({ accessToken: accessToken, refreshToken: refreshToken })
+    }
+    catch(err){
+        res.status(400).json("Incorrect username or password");
+    }
+  });
+  
+  
+  function generateAccessToken(user) {
+  return jwt.sign({UserName : user.UserName}, process.env.ACCESS_TOKEN_SECRET)
   }
-
-
+  
 
 
   

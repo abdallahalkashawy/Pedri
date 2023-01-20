@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar/Sidebar";
 import { useSelector } from "react-redux";
 const InstructorHome = () => {
     const currentUser = useSelector((state) => state.current.user);
-    console.log(currentUser.Type);
+    
     if(currentUser.Type === "Instructor")
     {
     return (

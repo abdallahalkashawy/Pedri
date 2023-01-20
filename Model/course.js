@@ -6,6 +6,7 @@ const courseSchema = new Schema({
     title: {
       type: String,
       required: true,
+      unique: true
     },
     instructor: {
       type: String,
@@ -30,7 +31,10 @@ const courseSchema = new Schema({
     Totalhours: {
       type: Number,
       required: true
-    }
+    },
+    Exams:[
+      String
+    ]
   });
 
 const course = mongoose.model('course', courseSchema);

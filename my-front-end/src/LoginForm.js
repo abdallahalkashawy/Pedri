@@ -1,7 +1,7 @@
 import React,{useContext , useEffect, useState} from 'react';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import { setUser } from './redux/userSlice'
-import { logIn } from './redux/authSlice';
+import { logIn, saveRefreshToken } from './redux/authSlice';
 import swal from 'sweetalert';
 import axios from 'axios';
 export const MyContext = React.createContext();
@@ -11,6 +11,7 @@ const LoginForm = ()=> {
   const [password, setPassword] = useState("");
 
   const userState = useSelector(state => state.current.user);
+  const currentaccess = useSelector(state => state.auth.refreshToken);
   const dispatch = useDispatch();
 
  const handleChange = (event) => {
@@ -41,7 +42,7 @@ const LoginForm = ()=> {
         Type: res.data.Type,
       }));
       dispatch(logIn());
-      console.log(userState);
+      dispatch(saveRefreshToken(res.data.accessToken));
       if(res.data.Type === "Instructor")
       {
         window.location.href = "/InstructorHome";

@@ -34,13 +34,13 @@ const SolveExam = () => {
         swal("Exam Submitted Successfully")
         window.location.href = "/TraineeHome";
       }).catch((err) => {
-        console.log(err.response.data);
+        swal("Exam Not Submitted")
       });
     setSubmitted(true);
   };
 
   const selectAnswer = (exerciseAnswer) => {
-    console.log(exerciseAnswer);
+   
     if (answer.length === 0) {
       setAnswer([exerciseAnswer]);
     } else {
@@ -53,7 +53,7 @@ const SolveExam = () => {
         setAnswer(updatedAnswers);
       }
     }
-    console.log(answer);
+    
   };
 
 
@@ -73,7 +73,7 @@ const SolveExam = () => {
           setExamName(res.data);
         })
         .catch((err) => {
-          console.log(currentUser.UserName);
+          
           Swal.fire({
             icon: "info",
             text: err.response.data,

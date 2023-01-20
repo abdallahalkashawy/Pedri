@@ -23,7 +23,6 @@ const Exam = () => {
   }
 
   useEffect(() => {
-    // console.log(questions);
   }, [questions]);
 
   const takeExercise = (exercise, answer) => {
@@ -57,7 +56,7 @@ const Exam = () => {
   };
 
   const addAnotherHandle = () => {
-    if (ExerciseCode.length !== 7) {
+    if (ExerciseCode.length !== 0) {
       setSubjectCodeError(true);
     } else {
       {
@@ -114,8 +113,7 @@ const Exam = () => {
       if (answers[i].ExerciseAnswer === "")
         errors += `Exercise ${i + 1} has no answer \n`;
     }
-    console.log(answers.length);
-    console.log(errors);
+    
     if (errors === "" && questions.length > 0 && answers.length > 0) {
       axios
         .post("http://localhost:3000/instructor/addExam", Exam, {
@@ -123,17 +121,17 @@ const Exam = () => {
         })
         .then((res) => {
           swal("Exam Added Successfully");
-          console.log(res.data);
+         
         })
         .catch((err) => {
           Swal.fire({
             icon: "warning",
             text: err.response.data,
           });
-          console.log(err.response.data);
+         
         });
     } else {
-      console.log(Exam);
+     
       if (questions.length === 0) {
         Swal.fire({
           icon: "warning",

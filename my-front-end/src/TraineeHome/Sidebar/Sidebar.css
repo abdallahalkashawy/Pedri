@@ -16,4 +16,17 @@
     display: block;
     padding: 10px;
     border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.sidebar li button{
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.sidebar li a:hover{
+    background: #ccc;
 }

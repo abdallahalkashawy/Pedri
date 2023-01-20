@@ -6,7 +6,7 @@ const authSlice = createSlice({
   initialState: { refreshToken: null,isLoggedIn: false },
   reducers: {
     saveRefreshToken: (state, action) => {
-        console.log(action.payload)
+        // console.log(action.payload)
       state.refreshToken = action.payload
     },
     returnRefreshToken: (state) => {
