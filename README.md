@@ -30,7 +30,42 @@ This page to Rate course and Instructor and Add Notes
 | price    | Number   | Req the Price of each course   |
 | rate     | Number   | Each course should have rating     
 | subject  | String    | each course should have subject 3    |
-  
+
+
+
+
+  Features
+  </br>This feature is complete and ready to use.  ✔
+
+ User Authentication
+   </br>This feature is complete and ready to use.  ✔
+
+ simple CRUD operations
+   </br>This feature is complete and ready to use.  ✔
+
+ User profile
+   </br>This feature is complete and ready to use.  ✔
+
+ Instructor profile
+   </br>This feature is complete and ready to use.  ✔
+
+ Instructor view courses
+   </br>This feature is complete and ready to use.  ✔
+
+
+ Trainee Rate cousre  feature is complete and ready to use.  ✔
+
+   </br>
+
+ Trainee view results
+ </br>This feature is complete and ready to use.  ✔
+
+ new guest signup
+ </br>This feature is complete and ready to use.  ✔
+
+ vew all regulations and rules to website
+
+ Trainee Rate InstructorThis feature is complete and ready to use.  ✔
 
 
 
