@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "react-to-pdf": "^0.0.14"
   }
 }
